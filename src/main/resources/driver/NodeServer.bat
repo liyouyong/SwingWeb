@@ -1,0 +1,1 @@
+java -Dwebdriver.chrome.driver="chromedriver.exe" -Dwebdriver.gecko.driver="geckodriver.exe" -Dwebdriver.ie.driver="IEDriverServer.exe" -Dphantomjs.binary.path="phantomjs.exe" -jar selenium-server-standalone-3.4.0.jar -port 5555 -role node
