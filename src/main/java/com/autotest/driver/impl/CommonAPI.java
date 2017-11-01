@@ -112,7 +112,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         }catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -149,7 +148,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -176,7 +174,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             return url;
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -191,7 +188,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             return title;
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -209,7 +205,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             return text;
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -227,7 +222,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             return text;
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -242,7 +236,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -257,7 +250,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -271,7 +263,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -286,7 +277,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -300,7 +290,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         } catch (Exception e) {
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -313,7 +302,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -337,7 +325,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -350,7 +337,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -365,7 +351,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails);
         }catch (Exception e){
             setFailTest(datails+ snapshot());
-            driver.quit();
             throw e;
         }
     }
@@ -383,7 +368,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails+"<br><a href='"+pngName+"' target='_black'><img src='"+pngName+"' width='500px' height='300px' alt='截图信息'></a>");
         } catch (IOException e) {
             setFailTest(datails+e.getMessage());
-            driver.quit();
         }
         return file;
     }
@@ -400,7 +384,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails+"<br><a href='"+pngName+"' target='_black'><img src='"+pngName+"' width='500px' height='300px' alt='截图信息'></a>");
         } catch (IOException e) {
             setFailTest(datails+e.getMessage());
-            driver.quit();
         }
         return file;
     }
@@ -417,7 +400,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails+"<br><a href='"+pngName+"' target='_black'><img src='"+pngName+"' width='500px' height='300px' alt='截图信息'></a>");
         } catch (IOException e) {
             setFailTest(datails+e.getMessage());
-            driver.quit();
         }
     }
 
@@ -430,7 +412,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails+"<br><span style=\"font-weight:bold;color: green\">Except:"+getValue(except)+";Actual:"+getValue(actual)+"</span>");
         } catch (Error e) {
             setFailTest(datails+e.getMessage());
-            driver.quit();
             throw e;
         }
     }
@@ -443,7 +424,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails+"<br><span style=\"font-weight:bold;color: green\">Except:"+getValue(except)+";Actual:"+getValue(actual)+"</span>");
         } catch (Error e) {
             setFailTest(datails+e.getMessage());
-            driver.quit();
             throw e;
         }
     }
@@ -456,7 +436,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             setPassTest(datails+"<br><span style=\"font-weight:bold;color: green\">Except:"+getValue(except)+";Actual:"+getValue(actual)+"</span>");
         } catch (Error e) {
             setFailTest(datails+e.getMessage());
-            driver.quit();
             throw e;
         }
     }
@@ -486,7 +465,6 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
             File scrFile=((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             Files.copy(scrFile, new File(file));
         } catch (Exception e) {
-            driver.quit();
             e.printStackTrace();
         }
         return "<br><a href='"+pngName+"' target='_black'><img src='"+pngName+"' width='500px' height='300px' alt='截图信息'></a>";

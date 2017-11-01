@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+    <test name="Test">
+
+        <classes>
+            <class name="com.autotest.test.getJenkinsData">
+            </class>
+        </classes>
+    </test>
+</suite>

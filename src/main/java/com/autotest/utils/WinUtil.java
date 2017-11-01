@@ -1,17 +1,13 @@
 package com.autotest.utils;
 
 
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 /**
  * Created by youyong.li on 11/1/2017.
@@ -26,6 +22,15 @@ public class WinUtil {
         r.delay(10);
         r.mouseRelease(InputEvent.BUTTON1_MASK);
         r.delay(delay);
+    }
+
+    public static void altTab(Robot r, int delay) throws Exception {
+        Thread.sleep(3000);
+        r.setAutoDelay(200);
+        r.keyPress(KeyEvent.VK_ALT);
+        r.keyPress(KeyEvent.VK_TAB);
+        r.keyRelease(KeyEvent.VK_ALT);
+        r.keyRelease(KeyEvent.VK_TAB);
     }
 
     /**
@@ -83,9 +88,6 @@ public class WinUtil {
     public static void doParse(Robot r) throws InterruptedException {
         r.setAutoDelay(500);
         Thread.sleep(2000);
-        r.mouseMove(300, 300);
-        r.mousePress(InputEvent.BUTTON1_MASK);
-        r.mouseRelease(InputEvent.BUTTON1_MASK);
         r.keyPress(KeyEvent.VK_CONTROL);
         r.keyPress(KeyEvent.VK_V);
         r.keyRelease(KeyEvent.VK_CONTROL);
