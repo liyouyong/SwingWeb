@@ -13,7 +13,6 @@ public class SendEmailByUI {
     public static void send(String filePath){
         try{
             final Robot rb = new Robot();
-
             // 设置开始菜单的大概位置
             int x = 40;
             int y = Toolkit.getDefaultToolkit().getScreenSize().height - 10;
@@ -46,13 +45,13 @@ public class SendEmailByUI {
             WinUtil.doParse(rb);
 
             WinUtil.clickLMouse(rb, 166, 166, 500);
-            WinUtil.copyDataToClipBoard("youyong.li@accenture.com");
-//            WinUtil.copyDataToClipBoard("leo.k.yung@accenture.com; daniel.w.leung@accenture.com; youyong.li@accenture.com");
+//            WinUtil.copyDataToClipBoard("youyong.li@accenture.com");
+            WinUtil.copyDataToClipBoard("leo.k.yung@accenture.com; daniel.w.leung@accenture.com; youyong.li@accenture.com");
             WinUtil.doParse(rb);
 
-            WinUtil.clickLMouse(rb, 265, 195, 500);
-            WinUtil.copyDataToClipBoard("youyong.li@accenture.com");
-//            WinUtil.copyDataToClipBoard("yijun.a.huang@accenture.com; dennis.k.lau@accenture.com; boriswong@melco-resorts.com; gary.k.leung@accenture.com; yong.tan@accenture.com; ruoli.chen@accenture.com");
+            WinUtil.clickLMouse(rb, 265, 198, 500);
+//            WinUtil.copyDataToClipBoard("youyong.li@accenture.com");
+            WinUtil.copyDataToClipBoard("jack.guangjing.chen@accenture.com; dennis.k.lau@accenture.com; boriswong@melco-resorts.com; gary.k.leung@accenture.com; yong.tan@accenture.com; ruoli.chen@accenture.com");
             WinUtil.doParse(rb);
 
             WinUtil.clickLMouse(rb,300,300,500);
@@ -73,6 +72,7 @@ public class SendEmailByUI {
             WinUtil.copyDataToClipBoard(filePath);
             WinUtil.doParse(rb);
             WinUtil.pressKeys(rb, enter, 500);
+            rb.delay(3000);
             rb.keyPress(KeyEvent.VK_CONTROL);
             rb.keyPress(KeyEvent.VK_A);
             rb.keyRelease(KeyEvent.VK_CONTROL);
@@ -95,10 +95,12 @@ public class SendEmailByUI {
 //            rb.keyPress(KeyEvent.VK_ENTER);
 //            rb.keyRelease(KeyEvent.VK_ENTER);
 //            rb.delay(2000);
-            //send email
-            WinUtil.clickLMouse(rb, 32, 200, 500);  //
-            //close excel
-            WinUtil.clickLMouse(rb, 1520, 10, 500);
+//            send email
+//            WinUtil.clickLMouse(rb, 32, 200, 500);  //
+//            //close excel
+//            WinUtil.altTab(rb,1000);
+//            rb.delay(1000);
+//            WinUtil.clickLMouse(rb, 1520, 10, 500);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -107,5 +109,38 @@ public class SendEmailByUI {
     public static void main(String[] args){
         String filePath = "D:\\Users\\z1115\\Track 3 QA Dashboard.xlsx";
         SendEmailByUI.send(filePath);
+//        try{
+//            Robot rb = new Robot();
+////            int[] ks = { KeyEvent.VK_CONTROL, KeyEvent.VK_ALT,KeyEvent.VK_DELETE};
+////            WinUtil.pressKeys(rb, ks, 500);
+//            int x = 40;
+//            int y = Toolkit.getDefaultToolkit().getScreenSize().height - 10;
+//
+//            // 鼠标移动到开始菜单
+//            rb.mouseMove(x, y);
+//            rb.delay(500);
+//
+//            // 单击开始菜单
+//            WinUtil.clickLMouse(rb, x, y, 500);
+//            rb.delay(1000);
+////
+//            WinUtil.clickLMouse(rb, 343, 706, 500);
+//            rb.delay(1000);
+//
+//            WinUtil.clickLMouse(rb, 403, 654, 500);
+//            rb.delay(1000);
+//            rb.setAutoDelay(500);
+//            Thread.sleep(2000);
+//            rb.keyPress(KeyEvent.VK_CONTROL);
+//            rb.keyPress(KeyEvent.VK_ALT);
+//            rb.keyPress(KeyEvent.VK_INSERT);
+//            rb.keyRelease(KeyEvent.VK_CONTROL);
+//            rb.keyRelease(KeyEvent.VK_ALT);
+//            rb.keyRelease(KeyEvent.VK_INSERT);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
     }
 }

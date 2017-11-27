@@ -74,11 +74,11 @@ public class WinUtil {
      */
     public static void doCopy(Robot r) throws InterruptedException {
         Thread.sleep(3000);
-        r.setAutoDelay(200);
+        r.setAutoDelay(1000);
         r.keyPress(KeyEvent.VK_CONTROL);
         r.keyPress(KeyEvent.VK_C);
-        r.keyRelease(KeyEvent.VK_CONTROL);
         r.keyRelease(KeyEvent.VK_C);
+        r.keyRelease(KeyEvent.VK_CONTROL);
     }
 
     /**
@@ -116,4 +116,12 @@ public class WinUtil {
         ImageIcon icon = new ImageIcon(fullScreenImage);
         return icon;
     }
+
+    public static Dimension getResolutionRatio() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        return screenSize;
+    }
+
+
 }

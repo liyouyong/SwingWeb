@@ -36,16 +36,22 @@ public class getJenkinsData extends WebAPI{
 
     @Test(priority =1, description ="Login local Jenkins")
     public void test0(){
-        startBrowser("chrome"); //
-        get("http://localhost:8089"); //
-        sendKeys("//input[@id='j_username']","0","liyouyong"); //
-        sendKeys("//input[@name='j_password']","0","123456"); //
+//        startBrowser("phantomjs"); //
+//        get("http://localhost:8089"); //
+//        sendKeys("//input[@id='j_username']","0","liyouyong"); //
+//        sendKeys("//input[@name='j_password']","0","123456"); //
+//        click("//button[@id='yui-gen1-button']","0"); //
+        startBrowser("phantomjs"); //
+        get("http://10.58.1.46:8080"); //
+        sendKeys("//input[@id='j_username']","0","techrefresh_readonly"); //
+        sendKeys("//input[@name='j_password']","0","1234pass"); //
         click("//button[@id='yui-gen1-button']","0"); //
     }
 
     @Test(priority =2, description ="UI Automation Some")
     public void test1(){
-        get("http://localhost:8089/job/sit-some-ui-automation/"); //
+//        get("http://localhost:8089/job/sit-some-ui-automation/"); //
+        get("http://10.58.1.46:8080/job/selenium-test-smoke/"); //
         click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
         click("//a[contains(text(),      'Cucumber reports')]","0"); //
         sleep("5"); //
@@ -55,7 +61,8 @@ public class getJenkinsData extends WebAPI{
 
     @Test(priority =3, description ="UI Automation All")
     public void test2(){
-        get("http://localhost:8089/job/sit-all-ui-automation/"); //
+//        get("http://localhost:8089/job/sit-all-ui-automation/"); //
+        get("http://10.58.1.46:8080/job/selenium-test-fullNightly/"); //
         click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
         click("//a[contains(text(),      'Cucumber reports')]","0"); //
         sleep("5"); //
@@ -63,19 +70,19 @@ public class getJenkinsData extends WebAPI{
         screenshot("cucumber_report"); //
     }
 
-    @Test(priority =4, description ="Logout local Jenkins")
-    public void test3(){
-        quit(); //
-    }
-
-    @Test(priority =5, description ="Login Server Jenkins")
-    public void test4(){
-        startBrowser("chrome"); //
-        get("http://10.58.1.46:8080"); //
-        sendKeys("//input[@id='j_username']","0","techrefresh_readonly"); //
-        sendKeys("//input[@name='j_password']","0","1234pass"); //
-        click("//button[@id='yui-gen1-button']","0"); //
-    }
+//    @Test(priority =4, description ="Logout local Jenkins")
+//    public void test3(){
+//        quit(); //
+//    }
+//
+//    @Test(priority =5, description ="Login Server Jenkins")
+//    public void test4(){
+//        startBrowser("phantomjs"); //
+//        get("http://10.58.1.46:8080"); //
+//        sendKeys("//input[@id='j_username']","0","techrefresh_readonly"); //
+//        sendKeys("//input[@name='j_password']","0","1234pass"); //
+//        click("//button[@id='yui-gen1-button']","0"); //
+//    }
 
     @Test(priority =6, description ="API Automation Patron")
     public void test5(){
@@ -134,7 +141,7 @@ public class getJenkinsData extends WebAPI{
 
     @Test(priority = 12, description ="export excel")
     public void test11() throws Exception {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String date = simpleDateFormat.format(new Date());
         all = String.valueOf((int) Math.round((Double.valueOf(patronRating.replace("%","")) +
                 Double.valueOf(itamdinRating.replace("%","")) +
