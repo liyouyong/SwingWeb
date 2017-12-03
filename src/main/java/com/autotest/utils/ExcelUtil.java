@@ -1,15 +1,15 @@
 package com.autotest.utils;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.*;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,24 +17,28 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * Created by z1245 on 10/27/2017.
  */
 public class ExcelUtil {
 
-    public static void insertExcel(int row, int column, String text, XSSFSheet sheet) {
+    public static void insertExcel(int row, int column, String text, XSSFSheet sheet, CellStyle cellStyle) {
 
         XSSFRow xssfRow = null;
         XSSFCell xssfCell = null;
 
         if(sheet.getRow(row-1) == null) {
             xssfRow = sheet.createRow(row-1);
+        } else {
+            xssfRow = sheet.getRow(row - 1);
         }
         if(xssfRow.getCell(column-1) == null) {
             xssfCell = xssfRow.createCell(column-1);
         }
         xssfCell.setCellType(XSSFCell.CELL_TYPE_STRING);
         xssfCell.setCellValue(text);
+        xssfCell.setCellStyle(cellStyle);
     }
 
     public static void shiftColumn(XSSFSheet sheet,int startColumn,int endColumn, int iStartRow, int iLastRow, int moveCol){
@@ -150,6 +154,7 @@ public class ExcelUtil {
         return wb.getSheetAt(index) ;
     }
 
+
     public static void createTrackQA(String filePath,String[] args){
         XSSFWorkbook workbook = null;
         try {
@@ -170,7 +175,70 @@ public class ExcelUtil {
 
     }
 
-    public static void main(String[] args){
+    public static String tableBodyCellElement(String id,int row,int col) {
+        String element = String.format(
+                "//table[@id='%s']/tbody/tr[%d]/td[%d]",
+                id, row,col);
+        return element;
+    }
+
+    public static String getValue(XSSFCell xssfRow) {
+        if (xssfRow.getCellType() == xssfRow.CELL_TYPE_BOOLEAN) {
+            return String.valueOf(xssfRow.getBooleanCellValue());
+        } else if (xssfRow.getCellType() == xssfRow.CELL_TYPE_NUMERIC) {
+            return String.valueOf(xssfRow.getNumericCellValue());
+        } else {
+            return String.valueOf(xssfRow.getStringCellValue());
+        }
+    }
+
+    public static void newSheet(Workbook wb,String filePath, String sheetDate) {
+        try
+        {
+            FileOutputStream fileOutputStream = new FileOutputStream (filePath);
+            wb.createSheet (sheetDate);
+            wb.write(fileOutputStream);
+            fileOutputStream.close();
+        }
+        catch (FileNotFoundException ex)
+        {
+            System.out.println (ex.getMessage() );
+        }
+        catch (IOException ex)
+        {
+            System.out.println (ex.getMessage() );
+        }
+    }
+
+    public static void dropDownList(XSSFSheet sheet, String filePath)
+            throws Exception {
+        String[] datas = new String[] {"System Issue","TBC ","Script Issue"};
+        XSSFDataValidationHelper dvHelper = new XSSFDataValidationHelper(sheet);
+        XSSFDataValidationConstraint dvConstraint = (XSSFDataValidationConstraint) dvHelper
+                .createExplicitListConstraint(datas);
+        CellRangeAddressList addressList = null;
+        XSSFDataValidation validation = null;
+        for (int i = 0; i < 100; i++) {
+            addressList = new CellRangeAddressList(i, i, 2, 2);
+            validation = (XSSFDataValidation) dvHelper.createValidation(
+                    dvConstraint, addressList);
+            // 07默认setSuppressDropDownArrow(true);
+            // validation.setSuppressDropDownArrow(true);
+            // validation.setShowErrorBox(true);
+            sheet.addValidationData(validation);
+        }
+    }
+
+    public static String getSheetDate() {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String sheetDate = simpleDateFormat.format(date);
+        return sheetDate;
+    }
+
+
+
+    /*public static void main(String[] args){
         String patronRating ="0%";
         String itamdinRating ="0%";
         String loyaltyRating ="0%";
@@ -189,6 +257,6 @@ public class ExcelUtil {
                 Double.valueOf(promotionRating.replace("%","")))/5)) + "%";
         String[] ages = {date,patronRating,itamdinRating,loyaltyRating,creditControlRating,promotionRating,all,someUI,allUI};
         ExcelUtil.createTrackQA(filePath,ages);
-    }
+    }*/
 
 }

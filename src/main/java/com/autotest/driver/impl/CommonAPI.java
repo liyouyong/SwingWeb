@@ -196,7 +196,7 @@ public class CommonAPI extends ExtentReportsBase implements ICommonAPI {
     public String getText(String element, String index, String key) {
         String datails = setDetails("getText", new String[]{element,index,key});
         String text;
-        sleep("2");
+//        sleep("2");
         try {
             WebElement webElement=findElement(element, Integer.parseInt(index));
             text = webElement.getText();
