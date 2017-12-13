@@ -13,7 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -160,10 +161,11 @@ public class ExcelUtil {
         try {
             workbook = (XSSFWorkbook) createWb(filePath);
             XSSFSheet sheet = (XSSFSheet)ExcelUtil.getSheet(workbook, "sheet1");
-            List<String> list = Arrays.asList(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7], args[8]);
-            ExcelUtil.deleteColoumContent(2,10, 3,3, sheet);
-            ExcelUtil.shiftColumn(sheet, 4, 7, 2,10 , -1);
-            ExcelUtil.insertColoum(list,7, 2, 10, sheet);
+            List<String> list = new ArrayList();;
+            Collections.addAll(list, args);
+            ExcelUtil.deleteColoumContent(2,12, 3,3, sheet);
+            ExcelUtil.shiftColumn(sheet, 4, 7, 2,12 , -1);
+            ExcelUtil.insertColoum(list,7, 2, 12, sheet);
             FileOutputStream fos = new FileOutputStream(filePath);
             workbook.write(fos);
             fos.flush();
@@ -238,7 +240,7 @@ public class ExcelUtil {
 
 
 
-    /*public static void main(String[] args){
+    public static void main(String[] args){
         String patronRating ="0%";
         String itamdinRating ="0%";
         String loyaltyRating ="0%";
@@ -247,6 +249,8 @@ public class ExcelUtil {
         String all ="0%";
         String someUI ="0%";
         String allUI ="0%";
+        String someqaUI ="0%";
+        String allqaUI ="0%";
         String filePath = "D:\\Users\\z1115\\1.xlsx";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = simpleDateFormat.format(new Date());
@@ -255,8 +259,8 @@ public class ExcelUtil {
                 Double.valueOf(loyaltyRating.replace("%","")) +
                 Double.valueOf(creditControlRating.replace("%","")) +
                 Double.valueOf(promotionRating.replace("%","")))/5)) + "%";
-        String[] ages = {date,patronRating,itamdinRating,loyaltyRating,creditControlRating,promotionRating,all,someUI,allUI};
+        String[] ages = {date,patronRating,itamdinRating,loyaltyRating,creditControlRating,promotionRating,all,someUI,allUI,someqaUI,allqaUI};
         ExcelUtil.createTrackQA(filePath,ages);
-    }*/
+    }
 
 }

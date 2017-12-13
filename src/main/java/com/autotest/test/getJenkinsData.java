@@ -1,7 +1,6 @@
 package com.autotest.test;
 
 import com.autotest.driver.impl.WebAPI;
-import com.autotest.piugins.email.SendEmailByUI;
 import com.autotest.utils.ExcelUtil;
 import com.autotest.utils.FileUtil;
 import org.testng.annotations.BeforeTest;
@@ -21,6 +20,8 @@ public class getJenkinsData extends WebAPI{
     private String promotionRating = "0%";
     private String someUI ="0%";
     private String allUI ="0%";
+    private String someqaUI ="0%";
+    private String allqaUI ="0%";
     private String all = "0%";
     private String filePath = "D:\\Users\\z1115\\Track 3 QA Dashboard.xlsx";
 
@@ -34,104 +35,69 @@ public class getJenkinsData extends WebAPI{
         setSharedPath(sharedPath);
     }
 
+    private String getData(String url){
+        get(url); //
+        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
+        click("//a[contains(text(),      'Cucumber reports')]","0"); //
+        sleep("5"); //
+        String result = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
+        screenshot("cucumber_report"); //
+        return result;
+    }
+
     @Test(priority =1, description ="Login local Jenkins")
     public void test0(){
-//        startBrowser("phantomjs"); //
-//        get("http://localhost:8089"); //
-//        sendKeys("//input[@id='j_username']","0","liyouyong"); //
-//        sendKeys("//input[@name='j_password']","0","123456"); //
-//        click("//button[@id='yui-gen1-button']","0"); //
         startBrowser("phantomjs"); //
         get("http://10.58.1.46:8080"); //
         sendKeys("//input[@id='j_username']","0","techrefresh_readonly"); //
         sendKeys("//input[@name='j_password']","0","1234pass"); //
         click("//button[@id='yui-gen1-button']","0"); //
+        quit();
     }
 
     @Test(priority =2, description ="UI Automation Some")
     public void test1(){
-//        get("http://localhost:8089/job/sit-some-ui-automation/"); //
-        get("http://10.58.1.46:8080/job/selenium-test-smoke/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        someUI = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        someUI = getData("http://10.58.1.46:8080/job/selenium-test-smoke/");
     }
 
     @Test(priority =3, description ="UI Automation All")
     public void test2(){
-//        get("http://localhost:8089/job/sit-all-ui-automation/"); //
-        get("http://10.58.1.46:8080/job/selenium-test-fullNightly/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        allUI = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        allUI = getData("http://10.58.1.46:8080/job/selenium-test-fullNightly/");
     }
 
-//    @Test(priority =4, description ="Logout local Jenkins")
-//    public void test3(){
-//        quit(); //
-//    }
-//
-//    @Test(priority =5, description ="Login Server Jenkins")
-//    public void test4(){
-//        startBrowser("phantomjs"); //
-//        get("http://10.58.1.46:8080"); //
-//        sendKeys("//input[@id='j_username']","0","techrefresh_readonly"); //
-//        sendKeys("//input[@name='j_password']","0","1234pass"); //
-//        click("//button[@id='yui-gen1-button']","0"); //
-//    }
+    @Test(priority =4, description ="UI Automation Some QA")
+    public void testSmokeQA(){
+        someqaUI = getData("http://10.58.1.46:8080/job/selenium-test-smoke-QA-env/");
+    }
+
+    @Test(priority =5, description ="UI Automation All QA")
+    public void testAllQA(){
+        allqaUI = getData("http://10.58.1.46:8080/job/selenium-test-fullNightly-QA-env/");
+    }
 
     @Test(priority =6, description ="API Automation Patron")
     public void test5(){
-        get("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Patron/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        patronRating = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        patronRating = getData("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Patron/");
     }
 
     @Test(priority =7, description ="API Automation Itadmin")
     public void test6(){
-        get("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Itadmin/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        itamdinRating = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        itamdinRating = getData("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Itadmin/");
     }
 
     @Test(priority =8, description ="API Automation Loyalty")
     public void test7(){
-        get("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Loyalty/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        loyaltyRating = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        loyaltyRating = getData("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Loyalty/");
     }
 
     @Test(priority =9, description ="API Automation CreditControl")
     public void test8(){
-        get("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-CreditControl/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        creditControlRating = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        creditControlRating = getData("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-CreditControl/");
     }
 
     @Test(priority =10, description ="API Automation Promotion")
     public void test9(){
-        get("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Promotion-new/"); //
-        click("//*[@id='buildHistory']/div[2]/table/tbody/tr[2]/td/div[1]/a","0"); //
-        click("//a[contains(text(),      'Cucumber reports')]","0"); //
-        sleep("5"); //
-        promotionRating = getText("//*[@id='tablesorter']/tfoot/tr[2]/td[12]","0","cucumber_result"); //
-        screenshot("cucumber_report"); //
+        promotionRating = getData("http://10.58.1.46:8080/job/dev-techrefresh-api-testing-Promotion-new/");
     }
 
     @Test(priority =11, description ="logout")
@@ -148,12 +114,12 @@ public class getJenkinsData extends WebAPI{
                 Double.valueOf(loyaltyRating.replace("%","")) +
                 Double.valueOf(creditControlRating.replace("%","")) +
                 Double.valueOf(promotionRating.replace("%","")))/5)) + "%";
-        String[] ages = {date,patronRating,itamdinRating,loyaltyRating,creditControlRating,promotionRating,all,someUI,allUI};
+        String[] ages = {date,patronRating,itamdinRating,loyaltyRating,creditControlRating,promotionRating,all,someUI,allUI,someqaUI,allqaUI};
         ExcelUtil.createTrackQA(filePath,ages);
     }
 
-    @Test(priority =13, description ="send email")
-    public void test12(){
-        SendEmailByUI.send(filePath);
-    }
+//    @Test(priority =13, description ="send email")
+//    public void test12(){
+//        SendEmailByUI.send(filePath);
+//    }
 }
